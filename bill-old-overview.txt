@@ -1,0 +1,5 @@
+Main log in page is registeer.php
+Users register in register.php
+They then get redirected to secretary.php, student.php, or teacher.php
+header.html is just a basic header to jump to the log in and register pages
+database.php handles the database and all the global functions
