@@ -6,17 +6,17 @@
     $db_name = "thesis_management"; // change this
     $conn;
 
-    //try{
+    try{
         $conn = mysqli_connect($db_server, 
                                $db_user, 
                                $db_password, 
                                $db_name);
 
-    //}
-    /*
+    }
+    
     catch(mysqli_sql_exception){
         echo "Could not connect to the Database";
-    }*/
+    }
 
 
     // returns true if the email is registered in the database
