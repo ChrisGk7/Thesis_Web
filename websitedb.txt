@@ -1,0 +1,81 @@
+DROP DATABASE if exists diplomatikiDB;
+CREATE DATABASE diplomatikiDB;
+USE diplomatikiDB;
+
+CREATE TABLE IF NOT EXISTS user (
+name varchar(25) DEFAULT 'unknown' NOT NULL,
+lastname varchar(35) DEFAULT 'unknown' NOT NULL,
+reg_date datetime NOT NULL,
+email varchar(30) DEFAULT 'unknown' NOT NULL,
+password varchar(32) DEFAULT 'unknown' NOT NULL,
+PRIMARY KEY (email)
+);
+
+CREATE TABLE IF NOT EXISTS student (
+sname varchar(25) REFERENCES user(name)
+ON UPDATE CASCADE ON DELETE CASCADE,
+slastname varchar(35) REFERENCES user(lastname)
+ON UPDATE CASCADE ON DELETE CASCADE,
+snumber varchar(8) DEFAULT '-' NOT NULL,
+street varchar(35) DEFAULT 'unknown' NOT NULL,
+number varchar(5) DEFAULT '-' NOT NULL,
+city varchar(25) DEFAULT 'unknown' NOT NULL,
+postcode varchar(7) DEFAULT 'unknown' NOT NULL,
+father_name varchar(25) DEFAULT 'unknown' NOT NULL,
+mobile_number varchar(10) DEFAULT 'unknown' NOT NULL,
+landline_number varchar(10) DEFAULT 'unknown' NOT NULL,
+semail varchar(30) DEFAULT 'unknown' NOT NULL ,
+
+PRIMARY KEY (semail),
+
+FOREIGN KEY (semail) REFERENCES user(email)
+ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS professor (
+pname varchar(25) DEFAULT 'unknown' NOT NULL,
+plastname varchar(35) DEFAULT 'unknown' NOT NULL,
+pemail varchar(30) DEFAULT 'unknown' NOT NULL,
+field tinytext DEFAULT 'unknown' NOT NULL,
+mobile_number int(10) DEFAULT 'unknown' NOT NULL,
+landline_number int(10) DEFAULT 'unknown' NOT NULL,
+department text DEFAULT 'unknown' NOT NULL,
+university tinytext DEFAULT 'unknown' NOT NULL,
+
+PRIMARY KEY (pemail),
+
+FOREIGN KEY (pemail) REFERENCES user(email)
+ON UPDATE CASCADE ON DELETE CASCADE,
+
+FOREIGN KEY (pname) REFERENCES user(name)
+ON UPDATE CASCADE ON DELETE CASCADE,
+
+FOREIGN KEY (plastname) REFERENCES user(lastname)
+ON UPDATE CASCADE ON DELETE CASCADE
+
+);
+
+CREATE TABLE IF NOT EXISTS thesis (
+thesis_id int()DEFAULT 'unknown' NOT NULL AUTO_INCREMENT,
+topic text DEFAULT 'unknown' NOT NULL,
+creator varchar(30) DEFAULT 'unknown' NOT NULL,
+student varchar(30) DEFAULT 'unknown' NOT NULL,
+#evaluator1 varchar(30) DEFAULT 'unknown' NOT NULL,
+#evaluator2 varchar(30) DEFAULT 'unknown' NOT NULL,
+
+state enum('awaiting assignment','active','evaluation') DEFAULT 'awaiting assignment'  NOT NULL,
+
+PRIMARY KEY (thesis_id),
+
+FOREIGN KEY creator REFERENCES professor(pemail)
+ON UPDATE CASCADE ON DELETE CASCADE,
+
+FOREIGN KEY student REFERENCES student(semail)
+ON UPDATE CASCADE ON DELETE CASCADE
+
+
+
+
+
+);
