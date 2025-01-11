@@ -1,5 +1,5 @@
 <?php
-    $conn;
+
     session_start();
     include("header.html");
     include("database.php");
@@ -46,11 +46,12 @@
             echo "Email is: {$email} and your Password is: {$password}<br>";
 
             if (check_user_in_db($email, $conn)){
+                
                 $type = check_user_type($email, $conn);
                 $_SESSION["email"] = $email;
+               // echo"$type";
                 
-
-                jump_to_site("{$type}.php");
+                jump_to_site($type);
                 
             }
             else{
