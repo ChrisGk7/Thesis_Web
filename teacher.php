@@ -13,9 +13,6 @@
     <title>Teacher</title>
 </head>
 <body>
-    <form action = "teacher.php" method="post">
-        <input type="submit" name="logout" value="logout">
-    </form>
 </body>
 </html>
 
@@ -32,9 +29,10 @@
     }
     */
 
-    if(isset($_SESSION['email'])){
+    if(check_user_type($_SESSION['email'], $conn) == "teacher"){
         echo $_SESSION['email']; // display the message
-        unset($_SESSION['email']); // clear the value so that it doesn't display again
+        $email = $_SESSION['email'];
+        $_SESSION['email'] = $email;
     }
     else{
         header("Location: index.php");
