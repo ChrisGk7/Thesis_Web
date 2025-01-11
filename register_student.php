@@ -13,7 +13,9 @@
     <title>Register</title>
 </head>
 <body>
-    <form action="register.php" method="post">
+    <form action="register_student.php" method="post">
+        <label>full name: </label><br>
+        <input type="text" name="name"><br>
         <label>email: </label><br>
         <input type="text" name="email"><br>
         <label>password: </label><br>
@@ -32,6 +34,8 @@
 
     if (isset($_POST["login"])){
         $email = $_POST["email"];
+        $name = $_POST["name"];
+        $type = "student";
         $password1 = $_POST["password1"];
         $password2 = $_POST["password2"];
 
@@ -50,13 +54,13 @@
 
         else{
             // FOR TESTING PURPOSES ONLY DELETE LATER
-            echo "Email is: {$email} and your Password is: {$password}<br>";
+            echo "Email is: {$email} and your Password is: {$password1}<br>";
             
             $_SESSION["email"] = $email;
 
-            register_user($email, $password1, $conn);
+            register_user($name, $email, $password1, $conn, $type);
 
-            jump_to_site($type);
+            //jump_to_site($type);
 
         }    
     }
