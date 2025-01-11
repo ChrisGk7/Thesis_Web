@@ -90,3 +90,5 @@ CREATE TABLE request(
   FOREIGN KEY (thesis_id) REFERENCES thesis(id) ON UPDATE
   CASCADE ON DELETE CASCADE 
 ); 
+
+ALTER TABLE `student_thesis_relation` ADD `json` JSON NULL AFTER `grade`; 
