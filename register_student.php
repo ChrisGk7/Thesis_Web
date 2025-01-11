@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Register as Student</title>
 </head>
 <body>
     <form action="register_student.php" method="post">
@@ -65,7 +65,7 @@
             // FOR TESTING PURPOSES ONLY DELETE LATER
             echo "Email is: {$email} and your Password is: {$password1}<br>";
             
-            $_SESSION["email"] = $email;
+            //$_SESSION["email"] = $email;
 
             register_user($name, $email, $password1, $type, $conn);
             register_student($email, $am, $cell, $phone, $conn);
