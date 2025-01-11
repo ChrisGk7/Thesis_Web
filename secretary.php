@@ -10,12 +10,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student</title>
+    <title>Secretary</title>
 </head>
 <body>
-    <form action = "student.php" method="post">
-        <input type="submit" name="logout" value="logout">
-    </form>
 </body>
 </html>
 
@@ -32,9 +29,8 @@
     echo "Secretary Page<br>";
     //echo $_POST["email"];
 
-    if(isset($_SESSION['email'])){
+    if(check_user_type($_SESSION['email'], $conn) == "secretary"){
         echo $_SESSION['email']; // display the message
-        unset($_SESSION['email']); // clear the value so that it doesn't display again
     }
     else{
         header("Location: index.php");
