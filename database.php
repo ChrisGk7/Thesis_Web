@@ -68,20 +68,20 @@
     
     function jump_to_site($type){
         // fix with enums
-        if ($type == "1"){
+        if ($type == "student"){
             header("Location: student.php");
         }
-        elseif ($type == "2"){
+        elseif ($type == "teacher"){
             header("Location: teacher.php");
         }
-        elseif ($type == "3"){
+        elseif ($type == "secretary"){
             header("Location: secretary.php");
         }
         else{
             // This should never occure
             echo "Unexpected User Type";
         }
-    }
+           }
 
 
 ?>
