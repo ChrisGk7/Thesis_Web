@@ -1,3 +1,8 @@
+DROP DATABASE if exists thesis_management;
+CREATE DATABASE thesis_management;
+USE thesis_management;
+
+
 CREATE TABLE user (
   email varchar(63) NOT NULL UNIQUE,
   pass varchar(255) DEFAULT NULL,
