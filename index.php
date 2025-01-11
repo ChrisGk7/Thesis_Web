@@ -57,7 +57,7 @@
             else{
                 echo "User '$email' is not in the Database<br>";
                 echo "Would you like to ";
-                echo "<a href='register_student.php' title='My Page'>register as a student</a><br><br>";
+                echo "<a href='register_student.php' title='My Page'>register as a student</a>";
                 echo "?";
             }
         }    
