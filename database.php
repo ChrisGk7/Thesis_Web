@@ -20,31 +20,31 @@
 
 
     // returns true if the email is registered in the database
-    function check_user_in_db($email, $conn){
+     function check_user_in_db($email, $conn){
         
-        $sql = "SELECT email FROM user WHERE user = '$email'";
-
+        $sql = "SELECT * FROM user WHERE email = '$email'";
+//empty($result)
         $result = mysqli_query($conn, $sql);
-        if (empty($result)){
-            return false;
-        }
-        else{
+        if (mysqli_num_rows($result)>0){
             return true;
         }
+        else{
+            return false;
+        }
     }
-
     // returns the type of user (Student, Teacher, Secretary)
     // user/email MUST be in database
     // use check_user_in_db first
-    function check_user_type($email, $conn){
+   function check_user_type($email, $conn){
         
-        $sql = "SELECT email FROM users WHERE user = '$email'";
+        $sql = "SELECT * FROM user WHERE email = '$email'";
         
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
+        //$test = $row["type"];
+       // echo "{$test}";
         return $row["type"];
-    }
-
+   }
     function register_user($name, $email, $password, $type, $conn){
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $sql = "INSERT INTO user VALUES ('$email', '$hash', '$name', '$type', DEFAULT)";
