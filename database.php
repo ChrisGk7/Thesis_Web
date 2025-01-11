@@ -22,7 +22,7 @@
     // returns true if the email is registered in the database
     function check_user_in_db($email, $conn){
         
-        $sql = "SELECT email FROM users WHERE user = '$email'";
+        $sql = "SELECT email FROM user WHERE user = '$email'";
 
         $result = mysqli_query($conn, $sql);
         if (empty($result)){
@@ -45,9 +45,9 @@
         return $row["type"];
     }
 
-    function register_user($name, $email, $password, $conn){
+    function register_user($name, $email, $password, $conn, $type){
         $hash = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO users VALUES ('$name', '$email', '$hash', 'student')";
+        $sql = "INSERT INTO user VALUES ('$email', '$hash', '$name', '$type', DEFAULT)";
         mysqli_query($conn, $sql);
     }
 
