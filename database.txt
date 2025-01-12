@@ -16,8 +16,8 @@ CREATE TABLE user (
 CREATE TABLE student (
   email varchar(63) NOT NULL UNIQUE,
   am int(7) NOT NULL UNIQUE,
-  cellphone int(10) NOT NULL UNIQUE,
-  phone int(10) NOT NULL,
+  cellphone varchar(10) NOT NULL UNIQUE,#  CHANGE
+  phone varchar(10) NOT NULL,#  CHANGE  
 
   FOREIGN KEY (email) REFERENCES user(email)
   ON UPDATE CASCADE ON DELETE CASCADE
@@ -94,3 +94,5 @@ CREATE TABLE request(
 ALTER TABLE `student_thesis_relation` ADD `json` JSON NULL AFTER `grade`; 
 
 ALTER TABLE `student` ADD `street` TEXT NULL DEFAULT NULL AFTER `am`, ADD `number` INT NULL DEFAULT NULL AFTER `street`, ADD `city` TEXT NOT NULL AFTER `number`, ADD `postcode` INT NULL DEFAULT NULL AFTER `city`, ADD `father_name` TEXT NULL DEFAULT NULL AFTER `postcode`;
+
+ALTER TABLE `teacher` ADD `topic` TEXT NOT NULL AFTER `email`, ADD `lanline` VARCHAR(63) NOT NULL AFTER `topic`, ADD `mobile` VARCHAR(63) NOT NULL AFTER `lanline`, ADD `department` TEXT NOT NULL AFTER `mobile`, ADD `university` TEXT NOT NULL AFTER `department`;
