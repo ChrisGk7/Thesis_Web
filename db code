@@ -93,5 +93,5 @@ CREATE TABLE request(
 
 ALTER TABLE `student_thesis_relation` ADD `json` JSON NULL AFTER `grade`; 
 
-ALTER TABLE `student` ADD `street` TEXT NULL DEFAULT NULL AFTER `am`, ADD `number` INT NULL DEFAULT NULL AFTER `street`, ADD `city` TEXT NOT NULL AFTER `number`, ADD `postcode` INT NULL DEFAULT NULL AFTER `city`, ADD `father_name` INT NULL DEFAULT NULL AFTER `postcode`;
+
 
