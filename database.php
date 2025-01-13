@@ -20,22 +20,20 @@
 
 
     // returns true if the email is registered in the database
-     function check_user_in_db($email, $conn){
+    function check_user_in_db($email, $conn){
         
         $sql = "SELECT * FROM user WHERE email = '$email'";
-//empty($result)
+        //empty($result)
         $result = mysqli_query($conn, $sql);
-        if (mysqli_num_rows($result)>0){
-            return true;
-        }
-        else{
-            return false;
-        }
+        
+        return mysqli_num_rows($result)>0;
+    
     }
+
     // returns the type of user (Student, Teacher, Secretary)
     // user/email MUST be in database
     // use check_user_in_db first
-   function check_user_type($email, $conn){
+    function check_user_type($email, $conn){
         
         $sql = "SELECT * FROM user WHERE email = '$email'";
         
@@ -44,20 +42,23 @@
         //$test = $row["type"];
        // echo "{$test}";
         return $row["type"];
-   }
+    }
+
+    // register logic
+
     function register_user($name, $email, $password, $type, $conn){
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $sql = "INSERT INTO user VALUES ('$email', '$hash', '$name', '$type', DEFAULT)";
         mysqli_query($conn, $sql);
     }
     
-    function register_student($email, $am, $cell, $phone, $conn){
-        $sql = "INSERT INTO student VALUES('$email', '$am', '$cell', '$phone')";
+    function register_student($email, $am, $street, $number, $city, $postcode, $father_name, $cell, $phone, $conn){
+        $sql = "INSERT INTO student VALUES('$email', '$am', '$street', '$number', '$city', '$postcode', '$father_name',  '$cell', '$phone')";
         mysqli_query($conn, $sql);
     }
 
-    function register_teacher($email, $conn){
-        $sql = "INSERT INTO teacher VALUES('$email')";
+    function register_teacher($email, $topic, $landline, $mobile, $department, $university, $conn){
+        $sql = "INSERT INTO teacher VALUES('$email', '$topic', '$landline', '$mobile', '$department', '$university')";
         mysqli_query($conn, $sql);
     }
 
@@ -65,7 +66,9 @@
         $sql = "INSERT INTO secretary VALUES('$email')";
         mysqli_query($conn, $sql);
     }
-    
+
+    // login logic
+
     function jump_to_site($type){
         // fix with enums
         if ($type == "student"){
@@ -81,7 +84,51 @@
             // This should never occure
             echo "Unexpected User Type";
         }
-           }
+    }
+
+    // retrieve all rows from a table
+
+    function get_rows_from_table($table, $conn){
+        $sql = "SELECT * FROM $table";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0){
+            return $result;
+        }
+        else{
+            return null;
+        }
+    }
+
+    // get all rows from a table where $wherewhat is $wherewho
+    // for example to get all thesis of teacher with key/email "teacher"
+    // $wherewhat should be "email" and $wherewho should be "teacher"
+
+    function get_rows_from_table_where($table, $wherewhat, $wherewho, $conn){
+        $sql = "SELECT * FROM $table WHERE $wherewhat = '$wherewho'";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0){
+            return $result;
+        }
+        else{
+            return null;
+        }
+    }
+
+    // update table named $table
+    // set column $colname to value $colvalue
+    // $wherewhat and $wherewho work the same as in the above function
+
+    function update_table_row($table, $colname, $colvalue, $wherewhat, $wherewho, $conn){
+        $sql = "UPDATE $table SET $colname = '$colvalue' WHERE $wherewhat = '$wherewho'";
+        mysqli_query($conn, $sql);
+    }
+
+    // thesis logic
+
+    function create_thesis($teacher, $title, $description, $conn){
+        $sql = "INSERT INTO thesis VALUES(DEFAULT, '$teacher', '$title', '$description')";
+        mysqli_query($conn, $sql);
+    }
 
 
 ?>
