@@ -109,3 +109,20 @@ CREATE TABLE request(
 ); 
 
 
+CREATE TABLE thesis_notes(
+  note_id int(30) NOT NULL AUTO_INCREMENT UNIQUE,
+  thesis_id int(30) NOT NULL,
+  teacher varchar(63) NOT NULL,
+  note_text text default NULL,
+
+  PRIMARY KEY (note_id),
+
+  FOREIGN KEY (thesis_id) REFERENCES thesis(id)
+  ON UPDATE CASCADE ON DELETE CASCADE,
+
+  FOREIGN KEY (teacher) REFERENCES teacher(email)
+  ON UPDATE CASCADE ON DELETE CASCADE
+
+)
+
+
