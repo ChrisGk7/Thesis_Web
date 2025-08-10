@@ -139,7 +139,7 @@
     }
 
     function add_to_student_thesis_relation($student_email, $thesis_id, $conn){
-        $sql = "INSERT INTO student_thesis_relation VALUES('$student_email', '$thesis_id', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)";
+        $sql = "INSERT INTO student_thesis_relation VALUES(DEFAULT, '$student_email', '$thesis_id', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)";
         mysqli_query($conn, $sql);
     }
 
